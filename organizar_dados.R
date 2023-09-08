@@ -12,10 +12,16 @@ data$dataDigitacao <- as.Date(data$DT_DIGITA, format="%d/%m/%Y")
 
 ## Diferença
 data$atrasoDias <- data$dataNotificacao - data$dataPrimSintomas
-table(data$dataPrimSintomas, data$atrasoDias)
+matrizDias <- as.matrix(table(data$dataPrimSintomas, data$atrasoDias))
+matrizDias
 
 data$atrasoSemanas <- floor( data$atrasoDias / 7 )
-table(data$SEM_NOT, data$atrasoSemanas)
+matrizSemanas <- as.matrix(table(data$SEM_NOT, data$atrasoSemanas))
+matrizSemanas
+
+## Totais
+addmargins(matrizDias)
+addmargins(matrizSemanas)
 
 
 ###### A partir daqui, rascunho
