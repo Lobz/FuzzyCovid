@@ -25,8 +25,8 @@ Xmat <- function(n){
   # Code that select the indices of the upper triangular (UTM) matrix
   for (i in 1:n) {
     for (j in 1:n) {
-      if (i + j <= (n+1)){
-        M[i,j] <- paste("Y", i,j, sep = "_")
+      if (i + j <= (n+1)){ ## se triangulo superior
+        M[i,j] <- paste("Y", i,j, sep = "_") ## Y_i_j
       } else {
         break
       }
@@ -58,7 +58,6 @@ Xmat <- function(n){
   }
 
   #
-File: /home/woundjiague/Mes_Donnes/.../Code R Datat 1/RcodeArticle.RPage 2 of 4
   return(X)
 
 }
