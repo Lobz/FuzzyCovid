@@ -1,23 +1,24 @@
 ### Script de organização dos dados .csv para uso no modelo
 
-data <- read.csv("./INFLUD21-01-05-2023.csv", sep= ";")
+data <- read.csv("./parcial.csv", sep= ";", na.strings = c("NA", "na", "", "-", " "))
 names(data)
 
 ## data inicial
 
-dataPrimSintomas <- "DT_SIN_PRI"
-dataEntradaHosp <- "DT_INTERNA"
-dataNotificacao <- "DT_NOTIFIC"
+data$dataPrimSintomas <- as.Date(data$DT_SIN_PRI, format="%d/%m/%Y")
+data$dataEntradaHosp <- as.Date(data$DT_INTERNA, format="%d/%m/%Y")
+data$dataNotificacao <- as.Date(data$DT_NOTIFIC, format="%d/%m/%Y")
+data$dataDigitacao <- as.Date(data$DT_DIGITA, format="%d/%m/%Y")
 
-## data de digitação
+## Diferença
+data$atrasoDias <- data$dataNotificacao - data$dataPrimSintomas
+table(data$dataPrimSintomas, data$atrasoDias)
 
-dataDig <- "DT_DIGITA"
-
-## organizar dados
-
-source("fixdata.R")
+data$atrasoSemanas <- floor( data$atrasoDias / 7 )
+table(data$SEM_NOT, data$atrasoSemanas)
 
 
+###### A partir daqui, rascunho
 ### Supondo que as datas sejam valores numéricos, em semanas:
 
 data$ATRASO <- data$DT_NOTIFIC - data$DT_INTERNA
@@ -33,6 +34,6 @@ table(data$ATRASO, data$DT_INTERNA)
 
 ##
 
-
+table(data$DT_NOTIF, data$INTERNA)
 
 ###########################
